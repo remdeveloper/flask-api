@@ -33,14 +33,14 @@ source venv\Scripts\activate (or on linux) source venv/bin/activate
 pip install -r requirements.txt
 
 create .env file and add
-JWT_SECRET_KEY=your_super_secret_key
-SQLALCHEMY_DATABASE_URI=sqlite:///database.db
-FLASK_ENV=development
-DEBUG=True
+- JWT_SECRET_KEY=your_super_secret_key
+- SQLALCHEMY_DATABASE_URI=sqlite:///database.db
+- FLASK_ENV=development
+- DEBUG=True
 
 python app.py
 
-### **API Endpoints**
+## API Endpoints
 
 | **Method** | **Endpoint**           | **Description**                        | **Requires Authentication** |
 |------------|------------------------|----------------------------------------|-----------------------------|
