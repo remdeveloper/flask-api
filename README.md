@@ -4,6 +4,8 @@ RESTful API built using flask, deployed on Render.
 The API includes authentication, user management, and CRUD functionality. You can test the API live at the following URL:
 https://flask-api-infb.onrender.com
 
+![Picture](assets/screenshot.png)
+
 ---
 
 ## Features
