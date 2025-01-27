@@ -40,10 +40,11 @@ DEBUG=True
 
 python app.py
 
-API Endpoints
-POST	/auth/register	    Register a new user	
-POST	/auth/login         Log in and get a JWT token
-GET	    /auth/users         Get all users (Requires authentication)
-GET	    /auth/users/<id>    Get a specific user by ID (Requires authentication)
-PUT	    /auth/users/<id>    Update a user by ID (Requires authentication)
-DELETE  /auth/users/<id>	Delete a user by ID (Requires authentication)
+## API Endpoints
+Method	Endpoint	Description	Requires Authentication
+POST	/auth/register	Register a new user	No
+POST	/auth/login	Log in and get a JWT token	No
+GET	/auth/users	Get all users	Yes
+GET	/auth/users/<id>	Get a specific user by ID	Yes
+PUT	/auth/users/<id>	Update a user by ID	Yes
+DELETE	/auth/users/<id>	Delete a user by ID	Yes
