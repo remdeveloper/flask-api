@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RESTful API Demo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    input, button {
+      margin: 5px;
+    }
+    .response {
+      margin-top: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+    }
+  </style>
+</head>
+<body>
+  <h1>RESTful API Demo</h1>
+
+  <h2>Register</h2>
+  <input id="reg-username" type="text" placeholder="Username">
+  <input id="reg-password" type="password" placeholder="Password">
+  <button onclick="register()">Register</button>
+
+  <h2>Login</h2>
+  <input id="login-username" type="text" placeholder="Username">
+  <input id="login-password" type="password" placeholder="Password">
+  <button onclick="login()">Login</button>
+
+  <h2>Get All Users</h2>
+  <button onclick="getUsers()">Get Users</button>
+
+  <h2>Update User</h2>
+  <input id="update-user-id" type="number" placeholder="User ID">
+  <input id="update-username" type="text" placeholder="New Username">
+  <input id="update-password" type="password" placeholder="New Password">
+  <button onclick="updateUser()">Update User</button>
+
+  <h2>Delete User</h2>
+  <input id="delete-user-id" type="number" placeholder="User ID">
+  <button onclick="deleteUser()">Delete User</button>
+
+  <div class="response" id="response"></div>
+
+  <script>
+    const apiUrl = "http://127.0.0.1:5000"; // depends on where api is hosted
+    let token = null;
+
+    async function register() {
+      const username = document.getElementById('reg-username').value;
+      const password = document.getElementById('reg-password').value;
+
+      const response = await fetch(`${apiUrl}/auth/register`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      });
+
+      document.getElementById('response').textContent = await response.text();
+    }
+
+    async function login() {
+      const username = document.getElementById('login-username').value;
+      const password = document.getElementById('login-password').value;
+
+      const response = await fetch(`${apiUrl}/auth/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        token = data.access_token;
+        document.getElementById('response').textContent = "Login successful! Token saved.";
+      } else {
+        document.getElementById('response').textContent = data.message || "Login failed.";
+      }
+    }
+
+    async function getUsers() {
+      const response = await fetch(`${apiUrl}/auth/users`, {
+        method: 'GET',
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+
+      document.getElementById('response').textContent = await response.text();
+    }
+
+    async function updateUser() {
+      const userId = document.getElementById('update-user-id').value;
+      const username = document.getElementById('update-username').value;
+      const password = document.getElementById('update-password').value;
+
+      const data = {};
+      if (username) data.username = username;
+      if (password) data.password = password;
+
+      const response = await fetch(`${apiUrl}/auth/users/${userId}`, {
+        method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
+
+      document.getElementById('response').textContent = await response.text();
+    }
+
+    async function deleteUser() {
+      const userId = document.getElementById('delete-user-id').value;
+
+      const response = await fetch(`${apiUrl}/auth/users/${userId}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+
+      document.getElementById('response').textContent = await response.text();
+    }
+  </script>
+</body>
+</html>
