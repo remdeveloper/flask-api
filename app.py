@@ -18,7 +18,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 jwt = JWTManager(app) # initialize jwtmanager
 
-
 app.register_blueprint(auth, url_prefix='/auth')
 
 
