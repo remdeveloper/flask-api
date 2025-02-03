@@ -4,7 +4,7 @@ RESTful API built using flask, containerized with Docker and deployed on Render.
 The API includes authentication, user management, and CRUD functionality. You can test the API live at the following URL:
 https://flask-api-1-j4d5.onrender.com
 
-![Picture](assets/screenshot2.png)
+![Picture](assets/screenshot3.png)
 
 ---
 

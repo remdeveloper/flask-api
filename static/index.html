@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <head>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+      </head>
+      
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RESTful API Demo</title>
@@ -21,34 +25,68 @@
     }
   </style>
 </head>
-<body>
-  <h1>RESTful API Demo</h1>
+<body class="bg-light">
+    <div class="container mt-5">
+      <h1 class="text-center text-primary">RESTful API Demo</h1>
+  
+      <!-- Register Section -->
+      <div class="card p-4 mb-4 shadow">
+        <h2>Register</h2>
+        <div class="mb-2">
+          <input id="reg-username" type="text" class="form-control" placeholder="Username">
+        </div>
+        <div class="mb-3">
+          <input id="reg-password" type="password" class="form-control" placeholder="Password">
+        </div>
+        <button class="btn btn-primary w-100" onclick="register()">Register</button>
+      </div>
+  
+      <!-- Login Section -->
+      <div class="card p-4 mb-4 shadow">
+        <h2>Login</h2>
+        <div class="mb-2">
+          <input id="login-username" type="text" class="form-control" placeholder="Username">
+        </div>
+        <div class="mb-3">
+          <input id="login-password" type="password" class="form-control" placeholder="Password">
+        </div>
+        <button class="btn btn-success w-100" onclick="login()">Login</button>
+      </div>
+  
+      <!-- Get Users -->
+      <div class="text-center">
+        <button class="btn btn-info w-100 mb-3" onclick="getUsers()">Get All Users</button>
+      </div>
+  
+      <!-- Update User -->
+      <div class="card p-4 mb-4 shadow">
+        <h2>Update User</h2>
+        <div class="mb-2">
+          <input id="update-user-id" type="number" class="form-control" placeholder="User ID">
+        </div>
+        <div class="mb-2">
+          <input id="update-username" type="text" class="form-control" placeholder="New Username">
+        </div>
+        <div class="mb-3">
+          <input id="update-password" type="password" class="form-control" placeholder="New Password">
+        </div>
+        <button class="btn btn-warning w-100" onclick="updateUser()">Update User</button>
+      </div>
+  
+      <!-- Delete User -->
+      <div class="card p-4 mb-4 shadow">
+        <h2>Delete User</h2>
+        <div class="mb-2">
+          <input id="delete-user-id" type="number" class="form-control" placeholder="User ID">
+        </div>
+        <button class="btn btn-danger w-100" onclick="deleteUser()">Delete User</button>
+      </div>
+  
+      <!-- Response Output -->
+      <div class="alert alert-secondary mt-3" id="response"></div>
+    </div>
 
-  <h2>Register</h2>
-  <input id="reg-username" type="text" placeholder="Username">
-  <input id="reg-password" type="password" placeholder="Password">
-  <button onclick="register()">Register</button>
-
-  <h2>Login</h2>
-  <input id="login-username" type="text" placeholder="Username">
-  <input id="login-password" type="password" placeholder="Password">
-  <button onclick="login()">Login</button>
-
-  <h2>Get All Users</h2>
-  <button onclick="getUsers()">Get Users</button>
-
-  <h2>Update User</h2>
-  <input id="update-user-id" type="number" placeholder="User ID">
-  <input id="update-username" type="text" placeholder="New Username">
-  <input id="update-password" type="password" placeholder="New Password">
-  <button onclick="updateUser()">Update User</button>
-
-  <h2>Delete User</h2>
-  <input id="delete-user-id" type="number" placeholder="User ID">
-  <button onclick="deleteUser()">Delete User</button>
-
-  <div class="response" id="response"></div>
-
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script>
     const apiUrl = window.location.hostname === '127.0.0.1'
   ? "http://127.0.0.1:5000"
